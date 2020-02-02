@@ -1,0 +1,54 @@
+{
+  "name": "premid",
+  "productName": "PreMiD",
+  "author": "Timeraa",
+  "description": "Discord Rich Presence for websites.",
+  "version": "1.0.0",
+  "repository": "https://github.com/PreMiD/PreMiD",
+  "license": "MIT",
+  "scripts": {
+    "init": "tsc && devScript --copyOnly",
+    "start": "electron dist/app/.",
+    "dev": "devScript",
+    "build": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && yarn && electron-builder install-app-deps && electron-builder"
+  },
+  "build": {
+    "appId": "com.PreMiD.app",
+    "copyright": "PreMiD Org",
+    "linux": {
+      "maintainer": "DooMLorD#2792",
+      "category": "Utility",
+      "artifactName": "${productName}.${ext}",
+      "target": [
+        "AppImage",
+        "snap",
+        "deb",
+        "rpm",
+        "freebsd",
+        "zip"
+      ],
+      "icon": "../../installer_assets/appIcon.icns"
+    }
+  },
+  "devDependencies": {
+    "@timeraa/devscript": "Timeraa/DevScript",
+    "@types/auto-launch": "5.0.1",
+    "@types/discord-rpc": "3.0.2",
+    "@types/node": "^12.12.21",
+    "@types/rimraf": "2.0.3",
+    "@types/socket.io": "2.1.4",
+    "chalk": "3.0.0",
+    "electron": "7.1.10",
+    "electron-builder": "^22.2.0",
+    "rimraf": "3.0.0",
+    "typescript": "3.7.5",
+    "yarn": "^1.21.1"
+  },
+  "dependencies": {
+    "auto-launch": "5.0.5",
+    "discord-rpc": "github:discordjs/RPC",
+    "electron-store": "5.1.0",
+    "electron-updater": "^4.2.0",
+    "socket.io": "2.3.0"
+  }
+}

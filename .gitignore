@@ -1,0 +1,15 @@
+node_modules
+out
+dist
+tmp
+
+.vscode
+.env
+
+src/package-lock.json
+src/package.json
+src/update.ini
+
+*.app
+*.xml.backup
+*.js
