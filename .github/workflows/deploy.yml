@@ -54,6 +54,7 @@ jobs:
       - name: Install Dependencies
         run: |
           npm i -g yarn
+          yarn global add json
           yarn
       - name: Building
         run: yarn build
@@ -74,6 +75,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish AppImage
         run: |
-          yarn global add json
           json -I -f package.json -e "this.productName='PreMiD Portable'"
           yarn build:appimage
