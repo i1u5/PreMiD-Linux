@@ -20,7 +20,7 @@ jobs:
       - name: Install Dependencies
         run: npm i
       - name: Building
-        run: npm build
+        run: npm run-script build
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
@@ -52,7 +52,7 @@ jobs:
       - name: Install Dependencies
         run: npm i
       - name: Building
-        run: npm build
+        run: npm run-script build
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
@@ -64,7 +64,7 @@ jobs:
             ./dist/app/dist/${{ steps.package.outputs.productName }}-${{ steps.package.outputs.version }}.freebsd
           tag_name: v${{ steps.package.outputs.version }}
           name: Stable v${{ steps.package.outputs.version }}
-          draft: true
+          draft: false
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
