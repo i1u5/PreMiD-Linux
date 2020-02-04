@@ -28,8 +28,11 @@ jobs:
         with:
           tag_name: ${{ steps.date.outputs.date }}
           release_name: Nightly v${{ steps.date.outputs.date }}
-          draft: false
+          draft: true
           prerelease: true
+      - name: R Debug
+        id: debug
+        run: echo ${{ steps.create_release.outputs.upload_url }}
       - name: Upload ZIP Package
         id: upload-unpacked
         uses: actions/upload-release-asset@v1.0.1
