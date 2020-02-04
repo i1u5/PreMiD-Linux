@@ -4,18 +4,27 @@ import { autoUpdater } from "electron-updater";
 
 
 export let updateProcess : string = "standby";
+let aU : boolean = false;
 
 export async function checkForUpdate(autoUpdate = false) {
-  if (autoUpdate) {
-    updateTray("installing");
-    autoUpdater.checkForUpdatesAndNotify();
-    return;
-  }
+  if(autoUpdate) aU = true;
+  updateTray("installing");
   autoUpdater.checkForUpdates();
 }
 
 autoUpdater.on('update-available', () => {
+  if(aU) {
+    aU = false;
+    update();
+  }
 	updateTray("available");
+})
+
+autoUpdater.on('update-not-available', (info) => {
+  if(aU) {
+    aU = false;
+  }
+  updateTray("standby");
 })
 
 export async function update() {

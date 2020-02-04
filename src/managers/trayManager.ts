@@ -47,14 +47,20 @@ export class TrayManager {
             (!updateProcess || (updateProcess && updateProcess == "standby"))
         },
         {
-          label: `Update ${app.name}`,
+          label: `Update now`,
           click: () => update(),
-          visible: updateProcess && updateProcess == "available"
+          visible:
+            app.isPackaged &&
+            app.name.includes("Portable") &&
+            updateProcess && updateProcess == "available"
         },
         {
           label: `Updating...`,
           enabled: false,
-          visible: updateProcess && updateProcess == "installing"
+          visible:
+            app.isPackaged &&
+            app.name.includes("Portable") &&
+            updateProcess && updateProcess == "installing"
         },
         {
           label: "Acknowledgments",
