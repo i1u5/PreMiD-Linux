@@ -33,6 +33,10 @@ export async function update() {
 }
 
 autoUpdater.on('error', (error) => {
+  if(aU) {
+    aU = false;
+  }
+  updateTray("standby");
   dialog.showErrorBox('Error: ', error == null ? "unknown" : (error.stack || error).toString());
 })
 
