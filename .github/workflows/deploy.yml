@@ -58,10 +58,6 @@ jobs:
         with:
           files: |
             ./dist/app/dist/${{ steps.package.outputs.productName }}-${{ steps.package.outputs.version }}.zip
-            ./dist/app/dist/${{ steps.package.outputs.productName }}-${{ steps.package.outputs.version }}.deb
-            ./dist/app/dist/${{ steps.package.outputs.productName }}-${{ steps.package.outputs.version }}.rpm
-            ./dist/app/dist/${{ steps.package.outputs.productName }}-${{ steps.package.outputs.version }}.snap
-            ./dist/app/dist/${{ steps.package.outputs.productName }}-${{ steps.package.outputs.version }}.freebsd
           tag_name: v${{ steps.package.outputs.version }}
           name: Stable v${{ steps.package.outputs.version }}
           draft: false
@@ -70,8 +66,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish AppImage
         run: |
-          npm i -g json
-          json -I -f package.json -e "this.productName='PreMiD Portable'"
-          yarn build:appimage
+          sudo apt-get install jq -y
+          jq -c '.productName = "PreMiD Portable"' package.json > tmp.$$.json && mv tmp.$$.json package.json
+          npm run-script build:appimage
         env: 
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
