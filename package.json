@@ -12,7 +12,7 @@
     "dev": "devScript",
     "build": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && yarn && electron-builder install-app-deps && electron-builder",
     "build:appimage": "cd dist/app/ && electron-builder build -l AppImage --x64 -p onTagOrDraft"
-  },
+  }, 
   "build": {
     "appId": "com.PreMiD.app",
     "copyright": "PreMiD Org",
