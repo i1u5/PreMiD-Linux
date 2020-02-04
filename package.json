@@ -3,7 +3,7 @@
   "productName": "PreMiD",
   "author": "Timeraa",
   "description": "Discord Rich Presence for websites.",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "repository": "https://github.com/PreMiD/PreMiD",
   "license": "MIT",
   "scripts": {
