@@ -18,11 +18,9 @@ jobs:
           echo "::set-output name=productName::$(node -p -e "require('./package.json').productName")"
           echo "::set-output name=version::$(node -p -e "require('./package.json').version")"
       - name: Install Dependencies
-        run: |
-          npm i -g yarn
-          yarn
+        run: npm i
       - name: Building
-        run: yarn build
+        run: npm build
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
@@ -35,7 +33,7 @@ jobs:
             ./dist/app/dist/${{ steps.info.outputs.productName }}-${{ steps.info.outputs.version }}.freebsd
           tag_name: ${{ steps.info.outputs.date }}
           name: Nightly v${{ steps.info.outputs.date }}
-          draft: true
+          draft: false
           prerelease: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -52,12 +50,9 @@ jobs:
           echo "::set-output name=productName::$(node -p -e "require('./package.json').productName")"
           echo "::set-output name=version::$(node -p -e "require('./package.json').version")"
       - name: Install Dependencies
-        run: |
-          npm i -g yarn
-          yarn global add json
-          yarn
+        run: npm i
       - name: Building
-        run: yarn build
+        run: npm build
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
@@ -75,5 +70,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish AppImage
         run: |
+          npm i -g json
           json -I -f package.json -e "this.productName='PreMiD Portable'"
           yarn build:appimage
