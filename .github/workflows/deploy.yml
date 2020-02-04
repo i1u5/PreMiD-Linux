@@ -73,3 +73,5 @@ jobs:
           npm i -g json
           json -I -f package.json -e "this.productName='PreMiD Portable'"
           yarn build:appimage
+        env: 
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
