@@ -12,87 +12,33 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/setup-node@master
       - name: Gather Information
-        id: date
-        run: echo "::set-output name=date::$(date +'%F-%H.%M.%S')"
+        id: info
+        run: |
+          echo "::set-output name=date::$(date +'%F-%H.%M.%S')"
+          echo "::set-output name=productName::$(node -p -e "require('./package.json').productName")"
+          echo "::set-output name=version::$(node -p -e "require('./package.json').version")"
       - name: Install Dependencies
         run: |
           npm i -g yarn
           yarn
       - name: Building
         run: yarn build
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.date.outputs.date }}
-          release_name: Nightly v${{ steps.date.outputs.date }}
+          files: |
+            ./dist/app/dist/${{ steps.info.outputs.productName }}-${{ steps.info.outputs.version }}.zip
+            ./dist/app/dist/${{ steps.info.outputs.productName }}-${{ steps.info.outputs.version }}.AppImage
+            ./dist/app/dist/${{ steps.info.outputs.productName }}-${{ steps.info.outputs.version }}.deb
+            ./dist/app/dist/${{ steps.info.outputs.productName }}-${{ steps.info.outputs.version }}.rpm
+            ./dist/app/dist/${{ steps.info.outputs.productName }}-${{ steps.info.outputs.version }}.snap
+            ./dist/app/dist/${{ steps.info.outputs.productName }}-${{ steps.info.outputs.version }}.freebsd
+          tag_name: ${{ steps.info.outputs.date }}
+          name: Nightly v${{ steps.info.outputs.date }}
           draft: true
           prerelease: true
-      - name: R Debug
-        id: debug
-        run: echo ${{ steps.create_release.outputs.upload_url }}
-      - name: Upload ZIP Package
-        id: upload-unpacked
-        uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./dist/app/dist/PreMiD.zip
-          asset_name: PreMiD.zip
-          asset_content_type: application/zip
-      - name: Upload AppImage Package
-        id: upload-appimage
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./dist/app/dist/PreMiD.AppImage
-          asset_name: PreMiD.AppImage
-          asset_content_type: application/octet-stream
-      - name: Upload Debian Package
-        id: upload-deb
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./dist/app/dist/PreMiD.deb
-          asset_name: PreMiD.deb
-          asset_content_type: application/octet-stream
-      - name: Upload RPM Package
-        id: upload-rpm
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./dist/app/dist/PreMiD.rpm
-          asset_name: PreMiD.rpm
-          asset_content_type: application/octet-stream
-      - name: Upload Snap Package
-        id: upload-snap
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./dist/app/dist/PreMiD.snap
-          asset_name: PreMiD.snap
-          asset_content_type: application/octet-stream
-      - name: Upload FreeBSD Package
-        id: upload-freebsd
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./dist/app/dist/PreMiD.freebsd
-          asset_name: PreMiD.freebsd
-          asset_content_type: application/octet-stream
   stable:
     name: Stable Build
     runs-on: ubuntu-latest
@@ -100,82 +46,34 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-node@master
-      - name: Gather Information
-        id: version
-        run: echo "::set-output name=version::$(node -p -e "require('./package.json').version")"
+      - name: Fetch Package.json
+        id: package
+        run: |
+          echo "::set-output name=productName::$(node -p -e "require('./package.json').productName")"
+          echo "::set-output name=version::$(node -p -e "require('./package.json').version")"
       - name: Install Dependencies
         run: |
           npm i -g yarn
           yarn
       - name: Building
         run: yarn build
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ steps.version.outputs.version }}
-          release_name: Stable v${{ steps.version.outputs.version }}
+          files: |
+            ./dist/app/dist/${{ steps.package.outputs.productName }}-${{ steps.package.outputs.version }}.zip
+            ./dist/app/dist/${{ steps.package.outputs.productName }}-${{ steps.package.outputs.version }}.deb
+            ./dist/app/dist/${{ steps.package.outputs.productName }}-${{ steps.package.outputs.version }}.rpm
+            ./dist/app/dist/${{ steps.package.outputs.productName }}-${{ steps.package.outputs.version }}.snap
+            ./dist/app/dist/${{ steps.package.outputs.productName }}-${{ steps.package.outputs.version }}.freebsd
+          tag_name: v${{ steps.package.outputs.version }}
+          name: Stable v${{ steps.package.outputs.version }}
           draft: true
           prerelease: false
-      - name: Upload ZIP Package
-        id: upload-unpacked
-        uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./dist/app/dist/PreMiD.zip
-          asset_name: PreMiD-${{ steps.version.outputs.version }}.zip
-          asset_content_type: application/zip
-      - name: Upload AppImage Package
-        id: upload-appimage
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./dist/app/dist/PreMiD.AppImage
-          asset_name: PreMiD-${{ steps.version.outputs.version }}.AppImage
-          asset_content_type: application/octet-stream
-      - name: Upload Debian Package
-        id: upload-deb
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./dist/app/dist/PreMiD.deb
-          asset_name: PreMiD-${{ steps.version.outputs.version }}.deb
-          asset_content_type: application/octet-stream
-      - name: Upload RPM Package
-        id: upload-rpm
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./dist/app/dist/PreMiD.rpm
-          asset_name: PreMiD-${{ steps.version.outputs.version }}.rpm
-          asset_content_type: application/octet-stream
-      - name: Upload Snap Package
-        id: upload-snap
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./dist/app/dist/PreMiD.snap
-          asset_name: PreMiD-${{ steps.version.outputs.version }}.snap
-          asset_content_type: application/octet-stream
-      - name: Upload FreeBSD Package
-        id: upload-freebsd
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./dist/app/dist/PreMiD.freebsd
-          asset_name: PreMiD-${{ steps.version.outputs.version }}.freebsd
-          asset_content_type: application/octet-stream
+      - name: Publish AppImage
+        run: |
+          yarn add json
+          json -I -f package.json -e "this.productName='PreMiD Portable'"
+          yarn build:appimage
