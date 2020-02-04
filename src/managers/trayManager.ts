@@ -1,26 +1,72 @@
-import { Menu, Tray } from "electron";
+import { Menu, Tray, app, shell } from "electron";
 import { join } from "path";
+import { trayManager } from "..";
+import { checkForUpdate, update, updateProcess } from "../util/updateChecker";
+import { connected } from "./socketManager";
 
-//* Export tray
-//* Export trayContextMenu
-export let tray: Tray;
-export let trayContextMenu = Menu.buildFromTemplate([
-  {
-    role: "quit"
-  }
-]);
+let trayIcon = join(__dirname, "../assets/tray/Icon@2x.png");
+export class TrayManager {
+	tray: Tray;
 
-/**
- * Create tray
- */
-export function init() {
-  //* Return promise resolves to Tray
-  return new Promise<Tray>(function(resolve) {
-    //* Create Tray
-    //* Set its context menu
-    //* Resolve promise
-    tray = new Tray(join(__dirname, "../assets/tray/IconTemplate.png"));
-    tray.setContextMenu(trayContextMenu);
-    resolve(tray);
-  });
+	constructor() {
+		this.tray = new Tray(trayIcon);
+		this.tray.setToolTip(app.name);
+
+		this.tray.on("right-click", () => this.update());
+	}
+
+	update() {
+		this.tray.setContextMenu(
+			Menu.buildFromTemplate([
+				{
+					icon: join(__dirname, "../assets/tray/Icon.png"),
+					label: `${app.name} v${app.getVersion()}`,
+					enabled: false
+				},
+				{
+					id: "connectInfo",
+					label: `Extension - ${connected ? "Connected" : "Not connected"}`,
+					enabled: false
+				},
+				{
+					type: "separator"
+				},
+				{
+					label: "Presence Store",
+					click: () => shell.openExternal("https://premid.app/store")
+				},
+				{
+					type: "separator"
+				},
+				{
+					label: "Check for Updates",
+					click: () => checkForUpdate(),
+					visible: !updateProcess || (updateProcess && updateProcess == "standby")
+        },
+				{
+          label: `Update ${app.name}`,
+          click: () => update(),
+					visible: (updateProcess && updateProcess == "available")
+        },
+				{
+          label: `Updating...`,
+          enabled: false,
+					visible: (updateProcess && updateProcess == "installing")
+				},
+				{
+					label: "Acknowledgments",
+					click: () => shell.openExternal("https://premid.app/contributors")
+				},
+				{
+					type: "separator"
+				},
+				{
+					label: `Quit ${app.name}`,
+					role: "quit"
+				}
+			])
+		);
+	}
 }
+
+app.once("quit", () => trayManager.tray.destroy());

@@ -3,7 +3,7 @@
   "productName": "PreMiD",
   "author": "Timeraa",
   "description": "Discord Rich Presence for websites.",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "repository": "https://github.com/PreMiD/PreMiD",
   "license": "MIT",
   "scripts": {
@@ -28,7 +28,14 @@
         "zip"
       ],
       "icon": "../../installer_assets/appIcon.icns"
-    }
+    },
+    "publish": [{
+      "provider": "github",
+      "owner": "doomlerd",
+      "repo": "PreMiD-Linux",
+      "vPrefixedTagName": true,
+      "releaseType": "release"
+    }]
   },
   "devDependencies": {
     "@timeraa/devscript": "Timeraa/DevScript",
