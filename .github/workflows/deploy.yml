@@ -14,13 +14,13 @@ jobs:
       - name: Gather Information
         id: info
         run: |
-          echo "::set-output name=date::$(date +'%F-%H.%M.%S')"
+          echo "::set-output name=sha::$(git rev-parse --short HEAD)"
           echo "::set-output name=productName::$(node -p -e "require('./package.json').productName")"
           echo "::set-output name=version::$(node -p -e "require('./package.json').version")"
       - name: Install Dependencies
         run: npm i
       - name: Building
-        run: npm run-script build
+        run: npm run build
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
@@ -31,8 +31,8 @@ jobs:
             ./dist/app/dist/${{ steps.info.outputs.productName }}-${{ steps.info.outputs.version }}.rpm
             ./dist/app/dist/${{ steps.info.outputs.productName }}-${{ steps.info.outputs.version }}.snap
             ./dist/app/dist/${{ steps.info.outputs.productName }}-${{ steps.info.outputs.version }}.freebsd
-          tag_name: ${{ steps.info.outputs.date }}
-          name: Nightly v${{ steps.info.outputs.date }}
+          tag_name: v${{ steps.info.outputs.version }}-${{ steps.info.outputs.sha }}
+          name: Nightly v${{ steps.info.outputs.version }}-${{ steps.info.outputs.sha }}
           draft: false
           prerelease: true
         env:
@@ -52,7 +52,7 @@ jobs:
       - name: Install Dependencies
         run: npm i
       - name: Building
-        run: npm run-script build
+        run: npm run build
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
@@ -68,6 +68,6 @@ jobs:
         run: |
           sudo apt-get install jq -y
           jq -c '.productName = "PreMiD Portable"' package.json > tmp.$$.json && mv tmp.$$.json package.json
-          npm run-script build:appimage
+          npm run build:appimage
         env: 
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

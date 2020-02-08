@@ -19,7 +19,7 @@
     "linux": {
       "maintainer": "DooMLorD#2792",
       "category": "Utility",
-      "artifactName": "${productName}-${version}.${ext}",
+      "artifactName": "${productName}.${ext}",
       "target": [
         "zip"
       ],
