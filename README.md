@@ -25,7 +25,7 @@ On the other hand, **PreMiD** is a simple, configurable utility that allows you 
 
 · Displays your current web service in Discord as your status.<br>
 · Grants full control over Presences.<br>
-· Supports over **400** web services, still rising!<br>
+· Supports over **420** web services, still rising!<br>
 · _Watch parties and more are coming soon!_
 
 # Installation/Troubleshooting

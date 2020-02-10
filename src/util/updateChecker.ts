@@ -4,10 +4,11 @@ import { autoUpdater } from "electron-updater";
 
 
 export let updateProcess : string = "standby";
+autoUpdater.autoDownload = false;
 let aU : boolean = false;
 
-export async function checkForUpdate(autoUpdate = false) {
-  if(autoUpdate) aU = true;
+export async function checkForUpdate(auto) {
+  if(auto) aU = true;
   updateTray("installing");
   autoUpdater.checkForUpdates();
 }
@@ -15,16 +16,18 @@ export async function checkForUpdate(autoUpdate = false) {
 autoUpdater.on('update-available', () => {
   if(aU) {
     aU = false;
-    update();
+    updateTray("installing");
   }
-	updateTray("available");
+  else {
+    updateTray("available");
+  }
 })
 
 autoUpdater.on('update-not-available', (info) => {
+  updateTray("standby");
   if(aU) {
     aU = false;
   }
-  updateTray("standby");
 })
 
 export async function update() {
@@ -33,11 +36,11 @@ export async function update() {
 }
 
 autoUpdater.on('error', (error) => {
+  updateTray("standby");
+  dialog.showErrorBox('An error occured while updating ' + aU ? '[AUTO] :' : '[MANUAL] :', error == null ? "unknown" : (error.stack || error).toString());
   if(aU) {
     aU = false;
   }
-  updateTray("standby");
-  dialog.showErrorBox('Error: ', error == null ? "unknown" : (error.stack || error).toString());
 })
 
 autoUpdater.on('update-downloaded', () => {
