@@ -60,7 +60,7 @@ jobs:
             ./dist/app/dist/${{ steps.package.outputs.productName }}-${{ steps.package.outputs.version }}.zip
           tag_name: v${{ steps.package.outputs.version }}
           name: Stable v${{ steps.package.outputs.version }}
-          draft: false
+          draft: true
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
