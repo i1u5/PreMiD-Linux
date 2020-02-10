@@ -7,7 +7,7 @@ export let updateProcess : string = "standby";
 autoUpdater.autoDownload = false;
 let aU : boolean = false;
 
-export async function checkForUpdate(auto) {
+export async function checkForUpdate(auto = false) {
   if(auto) aU = true;
   updateTray("installing");
   autoUpdater.checkForUpdates();
