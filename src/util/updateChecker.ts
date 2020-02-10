@@ -2,52 +2,50 @@ import { dialog } from "electron";
 import { trayManager } from "..";
 import { autoUpdater } from "electron-updater";
 
-
-export let updateProcess : string = "standby";
+export let updateProcess: string = "standby";
 autoUpdater.autoDownload = false;
-let aU : boolean = false;
 
 export async function checkForUpdate(auto = false) {
-  if(auto) aU = true;
+  autoUpdater.autoDownload = auto;
   updateTray("installing");
   autoUpdater.checkForUpdates();
 }
 
-autoUpdater.on('update-available', () => {
-  if(aU) {
-    aU = false;
+autoUpdater.on("checking-for-update", () => {
+  updateTray("checking");
+});
+
+autoUpdater.on("update-available", () => {
+  if (autoUpdater.autoDownload === true) {
     updateTray("installing");
-  }
-  else {
+  } else {
     updateTray("available");
   }
-})
+});
 
-autoUpdater.on('update-not-available', (info) => {
+autoUpdater.on("update-not-available", () => {
   updateTray("standby");
-  if(aU) {
-    aU = false;
-  }
-})
+});
 
 export async function update() {
   updateTray("installing");
-	autoUpdater.downloadUpdate();
+  autoUpdater.downloadUpdate();
 }
 
-autoUpdater.on('error', (error) => {
+autoUpdater.on("error", error => {
   updateTray("standby");
-  dialog.showErrorBox('An error occured while updating ' + aU ? '[AUTO] :' : '[MANUAL] :', error == null ? "unknown" : (error.stack || error).toString());
-  if(aU) {
-    aU = false;
-  }
-})
+  dialog.showErrorBox(
+    "An error occured while updating " +
+      (autoUpdater.autoDownload === true ? "[AUTO] :" : "[MANUAL] :"),
+    error == null ? "unknown" : (error.stack || error).toString()
+  );
+});
 
-autoUpdater.on('update-downloaded', () => {
-  setImmediate(() => autoUpdater.quitAndInstall());
-})
+autoUpdater.on("update-downloaded", () => {
+  autoUpdater.quitAndInstall();
+});
 
-function updateTray(reason : string) {
-	updateProcess = reason;
-	trayManager.update();
+function updateTray(reason: string) {
+  updateProcess = reason;
+  trayManager.update();
 }

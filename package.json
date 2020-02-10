@@ -3,15 +3,15 @@
   "productName": "PreMiD",
   "author": "Timeraa",
   "description": "Discord Rich Presence for websites.",
-  "version": "2.0.19",
+  "version": "2.0.20",
   "repository": "https://github.com/PreMiD/PreMiD",
   "license": "MIT",
   "scripts": {
     "init": "tsc && devScript --copyOnly",
     "start": "electron dist/app/.",
     "dev": "devScript",
-    "build": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && yarn && electron-builder install-app-deps && electron-builder",
-    "build:appimage": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && yarn && electron-builder install-app-deps && electron-builder build -l AppImage --x64 -p onTagOrDraft"
+    "build": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && npm i && electron-builder install-app-deps && electron-builder",
+    "build:appimage": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && npm i && electron-builder install-app-deps && electron-builder build -l AppImage --x64 -p onTagOrDraft"
   }, 
   "build": {
     "appId": "com.PreMiD.app",

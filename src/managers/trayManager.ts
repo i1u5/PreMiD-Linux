@@ -39,12 +39,12 @@ export class TrayManager {
           type: "separator"
         },
         {
-          label: "Check for Updates",
+          label: "Check for updates",
           click: () => checkForUpdate(),
           visible:
             app.isPackaged &&
             app.name.includes("Portable") &&
-            (!updateProcess || (updateProcess && updateProcess == "standby"))
+            (!updateProcess || (updateProcess && updateProcess === "standby"))
         },
         {
           label: `Update now`,
@@ -52,7 +52,7 @@ export class TrayManager {
           visible:
             app.isPackaged &&
             app.name.includes("Portable") &&
-            updateProcess && updateProcess == "available"
+            updateProcess && updateProcess === "available"
         },
         {
           label: `Updating...`,
@@ -60,7 +60,15 @@ export class TrayManager {
           visible:
             app.isPackaged &&
             app.name.includes("Portable") &&
-            updateProcess && updateProcess == "installing"
+            updateProcess && updateProcess === "installing"
+        },
+        {
+          label: `Checking for updates...`,
+          enabled: false,
+          visible:
+            app.isPackaged &&
+            app.name.includes("Portable") &&
+            updateProcess && updateProcess === "checking"
         },
         {
           label: "Acknowledgments",
