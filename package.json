@@ -3,7 +3,7 @@
   "productName": "PreMiD",
   "author": "Timeraa",
   "description": "Discord Rich Presence for websites.",
-  "version": "2.0.20",
+  "version": "2.0.21",
   "repository": "https://github.com/PreMiD/PreMiD",
   "license": "MIT",
   "scripts": {
@@ -11,8 +11,9 @@
     "start": "electron dist/app/.",
     "dev": "devScript",
     "build": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && npm i && electron-builder install-app-deps && electron-builder",
-    "build:appimage": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && npm i && electron-builder install-app-deps && electron-builder build -l AppImage --x64 -p onTagOrDraft"
-  }, 
+    "build:appimage": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && npm i && electron-builder install-app-deps && electron-builder build -l AppImage --x64 -p onTagOrDraft",
+    "build:snap": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && npm i && electron-builder install-app-deps && electron-builder build -l Snap --x64 -p onTagOrDraft"
+  },
   "build": {
     "appId": "com.PreMiD.app",
     "copyright": "PreMiD Org",
@@ -25,13 +26,20 @@
       ],
       "icon": "../../installer_assets/appIcon.icns"
     },
-    "publish": [{
-      "provider": "github",
-      "owner": "doomlerd",
-      "repo": "PreMiD-Linux",
-      "vPrefixedTagName": true,
-      "releaseType": "release"
-    }]
+    "snap": {
+      "confinement": "classic",
+      "summary": "Discord Rich Presence for websites.",
+      "grade": "devel"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "doomlerd",
+        "repo": "PreMiD-Linux",
+        "vPrefixedTagName": true,
+        "releaseType": "release"
+      }
+    ]
   },
   "devDependencies": {
     "@timeraa/devscript": "Timeraa/DevScript",

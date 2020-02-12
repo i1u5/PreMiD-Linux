@@ -71,3 +71,5 @@ jobs:
           npm run build:appimage
         env: 
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish Snap
+        run : npm run build:snap

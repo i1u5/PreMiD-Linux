@@ -46,6 +46,9 @@ autoUpdater.on("update-downloaded", () => {
 });
 
 function updateTray(reason: string) {
+  console.log(
+    (autoUpdater.autoDownload === true ? "[A/" : "[M/") + "UPDATER] - " + reason
+  );
   updateProcess = reason;
   trayManager.update();
 }
