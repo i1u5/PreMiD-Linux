@@ -38,7 +38,7 @@ class RPCClient {
 		presenceData = presenceData ? presenceData : this.currentPresence;
 
 		if (!this.clientReady || !presenceData) return;
-
+		
 		this.client.setActivity(presenceData.presenceData).catch(this.destroy);
 		info("setActivity");
 	}

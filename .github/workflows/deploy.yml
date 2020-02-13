@@ -1,5 +1,5 @@
 name: Deploy
-on: 
+on:
   repository_dispatch:
   push:
     branch: master
@@ -66,10 +66,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish AppImage
         run: |
-          sudo apt-get install jq -y
           jq -c '.productName = "PreMiD Portable"' package.json > tmp.$$.json && mv tmp.$$.json package.json
           npm run build:appimage
-        env: 
+        env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install Snapcraft
+        uses: samuelmeuli/action-snapcraft@v1
+        with:
+          snapcraft_token: ${{ secrets.snapcraft_token }}
       - name: Publish Snap
-        run : npm run build:snap
+        run: npm run build:snap
