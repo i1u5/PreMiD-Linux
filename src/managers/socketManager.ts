@@ -1,7 +1,6 @@
 import socketIo from "socket.io";
 import { createServer, Server } from "http";
 import { app, dialog } from "electron";
-import { success, error } from "../util/debug";
 import { update as updateSettings } from "./settingsManager";
 import { openFileDialog } from "./presenceDevManager";
 import {
@@ -28,9 +27,8 @@ export function init() {
 		io = socketIo(server, { serveClient: false });
 		server.listen(3020, () => {
 			//* Resolve promise
-			//* Debug info
 			resolve();
-			success("Opened socket");
+			console.log("Opened socket");
 		});
 		server.on("error", socketError);
 		io.on("connection", socketConnection);
@@ -38,7 +36,6 @@ export function init() {
 }
 
 function socketConnection(cSocket: socketIo.Socket) {
-	//* Show debug
 	//* Set exported socket letiable to current socket
 	//* Handle setActivity event
 	//* Handle clearActivity event
@@ -46,7 +43,7 @@ function socketConnection(cSocket: socketIo.Socket) {
 	//* Handle presenceDev
 	//* Handle version request
 	//* Once socket user disconnects run cleanup
-	success("Socket connection");
+	console.log("Socket connection");
 	socket = cSocket;
 	getDiscordUser().then(user => socket.emit("discordUser", user));
 	socket.on("setActivity", setActivity);
@@ -59,9 +56,8 @@ function socketConnection(cSocket: socketIo.Socket) {
 	socket.once("disconnect", () => {
 		connected = false;
 		trayManager.update();
-		//* Show debug
 		//* Destroy all open RPC connections
-		error("Socket disconnection.");
+		console.log("Socket disconnected.");
 		rpcClients.forEach(c => c.destroy());
 	});
 	connected = true;
@@ -70,9 +66,8 @@ function socketConnection(cSocket: socketIo.Socket) {
 
 //* Runs on socket errors
 function socketError(e: any) {
-	//* Show debug
 	//* If port in use
-	error(e.message);
+	console.log(`Socket error :\n${e.message}`);
 	if (e.code === "EADDRINUSE") {
 		//* Focus app
 		//* Show error dialog

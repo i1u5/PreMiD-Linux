@@ -3,7 +3,7 @@
   "productName": "PreMiD",
   "author": "Timeraa",
   "description": "Discord Rich Presence for websites.",
-  "version": "2.0.22",
+  "version": "2.0.23",
   "repository": "https://github.com/PreMiD/PreMiD",
   "license": "MIT",
   "scripts": {
@@ -11,8 +11,7 @@
     "start": "electron dist/app/.",
     "dev": "devScript",
     "build": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && npm i && electron-builder install-app-deps && electron-builder",
-    "build:appimage": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && npm i && electron-builder install-app-deps && electron-builder build -l AppImage --x64 -p onTagOrDraft",
-    "build:snap": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && npm i && electron-builder install-app-deps && electron-builder build -l Snap --x64 -p always"
+    "build:appimage": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && npm i && electron-builder install-app-deps && electron-builder build -l AppImage --x64 -p onTagOrDraft"
   },
   "build": {
     "appId": "com.PreMiD.app",
@@ -25,11 +24,6 @@
         "zip"
       ],
       "icon": "../../installer_assets/appIcon.icns"
-    },
-    "snap": {
-      "confinement": "devmode",
-      "summary": "Discord Rich Presence for websites.",
-      "grade": "devel"
     },
     "publish": [
       {
@@ -48,7 +42,6 @@
     "@types/node": "^12.12.21",
     "@types/rimraf": "2.0.3",
     "@types/socket.io": "2.1.4",
-    "chalk": "3.0.0",
     "electron": "7.1.10",
     "electron-builder": "^22.2.0",
     "rimraf": "3.0.0",

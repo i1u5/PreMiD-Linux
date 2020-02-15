@@ -2,7 +2,6 @@ import { readdirSync, readFileSync, unwatchFile, watchFile } from "fs";
 import { dialog } from "electron";
 import { socket } from "./socketManager";
 import { extname } from "path";
-import { info } from "../util/debug";
 
 let presenceDevWatchedFiles = [],
   currWatchPath = "";
@@ -62,12 +61,11 @@ export async function openFileDialog() {
     properties: ["openDirectory"]
   });
   if (oDialog.canceled) {
-    //* Show debug
     //* return
-    info("Presence load canceled.");
+    console.log("Presence load canceled.");
     return;
   }
-  info(`Watching ${oDialog.filePaths[0]}`);
+  console.log(`Watching ${oDialog.filePaths[0]}`);
   if (presenceDevWatchedFiles.length > 0)
     await Promise.all(
       presenceDevWatchedFiles.map(f => unwatchFile(currWatchPath + f))

@@ -1,7 +1,6 @@
 import AutoLaunch from "auto-launch";
 import { app } from "electron";
 import { settings } from "./settingsManager";
-import { info } from "../util/debug";
 
 //* Create autoLaunch object
 let autoLaunch = new AutoLaunch({
@@ -16,9 +15,8 @@ export async function update() {
   //* If app not packaged return
   //* Either enable/disable autolaunch
   if (!app.isPackaged || (app.isPackaged && app.name.includes("Portable"))) {
-    //* Show debug
     //* Return
-    info("Skipping autoLaunch.");
+    console.log("Skipping autoLaunch.");
     return;
   }
   if (settings.get("autoLaunch", true))
