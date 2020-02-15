@@ -7,7 +7,7 @@ autoUpdater.autoDownload = false;
 
 export async function checkForUpdate(auto = false) {
   autoUpdater.autoDownload = auto;
-  updateTray("installing");
+  updateTray("checking");
   autoUpdater.checkForUpdates();
 }
 
@@ -47,7 +47,7 @@ autoUpdater.on("update-downloaded", () => {
 
 function updateTray(reason: string) {
   console.log(
-    (autoUpdater.autoDownload === true ? "[A/" : "[M/") + "UPDATER] - " + reason
+    (autoUpdater.autoDownload === true ? "[A/" : "[M/") + "UPDATER] - " + reason.toUpperCase()
   );
   updateProcess = reason;
   trayManager.update();
