@@ -39,6 +39,7 @@ class RPCClient {
 
 		if (!this.clientReady || !presenceData) return;
 		
+		presenceData.presenceData.largeImageText += ` App v${app.getVersion()}`; 
 		this.client.setActivity(presenceData.presenceData).catch(this.destroy);
 		info("setActivity");
 	}

@@ -27,7 +27,7 @@
       "icon": "../../installer_assets/appIcon.icns"
     },
     "snap": {
-      "confinement": "classic",
+      "confinement": "devmode",
       "summary": "Discord Rich Presence for websites.",
       "grade": "devel"
     },

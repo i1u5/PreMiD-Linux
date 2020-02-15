@@ -64,15 +64,15 @@ jobs:
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish AppImage
-        run: |
-          jq -c '.productName = "PreMiD Portable"' package.json > tmp.$$.json && mv tmp.$$.json package.json
-          npm run build:appimage
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Install Snapcraft
         uses: samuelmeuli/action-snapcraft@v1
         with:
           snapcraft_token: ${{ secrets.snapcraft_token }}
       - name: Publish Snap
         run: npm run build:snap
+      - name: Publish AppImage
+        run: |
+          jq -c '.productName = "PreMiD Portable"' package.json > tmp.$$.json && mv tmp.$$.json package.json
+          npm run build:appimage
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
