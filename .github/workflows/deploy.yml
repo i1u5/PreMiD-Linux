@@ -70,7 +70,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish AppImage
         run: |
-          jq -c '.productName = "PreMiD Portable"' package.json > tmp.$$.json && mv tmp.$$.json package.json
+          jq -c '.productName = "PreMiD Portable"' ./dist/app/package.json > tmp.$$.json && mv tmp.$$.json ./dist/app/package.json
           npm run build:appimage
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
