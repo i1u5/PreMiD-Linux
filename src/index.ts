@@ -11,14 +11,16 @@ export let trayManager: TrayManager;
 //* When app is ready
 export let updateCheckerInterval = null;
 app.whenReady().then(async () => {
-	trayManager = new TrayManager();
-	await initAutoLaunch();
-	await initSocket()
+  trayManager = new TrayManager();
+  await initAutoLaunch();
+  await initSocket();
 
-	if(app.isPackaged && app.name.includes("Portable")) {
-		await checkForUpdate(true);
-		updateCheckerInterval = setInterval(()=>{checkForUpdate(true);}, 15 * 1000 * 60);
-	}
+  if (app.isPackaged && app.name.includes("Portable")) {
+    await checkForUpdate(true);
+    updateCheckerInterval = setInterval(() => {
+      checkForUpdate(true);
+    }, 15 * 1000 * 60);
+  }
 });
 
 //* If second instance started, close old one
@@ -26,8 +28,8 @@ app.on("second-instance", () => app.exit(0));
 
 //* Send errors from app to extension
 process.on("unhandledRejection", rejection => {
-	console.error(rejection);
-	if (socket && socket.connected) socket.emit("unhandledRejection", rejection);
+  console.error(rejection);
+  if (socket && socket.connected) socket.emit("unhandledRejection", rejection);
 });
 
 // TODO Find better way to log

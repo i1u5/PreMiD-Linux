@@ -2,16 +2,18 @@
   "name": "premid",
   "productName": "PreMiD",
   "author": "Timeraa",
-  "description": "Discord Rich Presence for websites.",
-  "version": "2.0.28",
+  "description": "Discord Rich Presence for web services.",
+  "version": "2.1.0",
   "repository": "https://github.com/PreMiD/PreMiD",
   "license": "MIT",
   "scripts": {
     "init": "tsc && devScript --copyOnly",
-    "start": "electron dist/app/.",
+    "start": "npm run init && electron dist/app/.",
     "dev": "devScript",
-    "build": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && npm i && electron-builder install-app-deps && electron-builder",
-    "build:appimage": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && npm i && electron-builder install-app-deps && electron-builder build -l AppImage --x64 -p onTagOrDraft"
+    "dist": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && npm i",
+    "build": "electron-builder",
+    "build:appimage": "electron-builder build -l AppImage --x64 -p onTagOrDraft",
+    "build:n-appimage": "electron-builder build -l AppImage --x64 -p never"
   },
   "build": {
     "appId": "com.PreMiD.app",
@@ -39,19 +41,19 @@
     "@timeraa/devscript": "Timeraa/DevScript",
     "@types/auto-launch": "5.0.1",
     "@types/discord-rpc": "3.0.2",
-    "@types/node": "^12.12.21",
+    "@types/node": "13.7.1",
     "@types/rimraf": "2.0.3",
     "@types/socket.io": "2.1.4",
-    "electron": "7.1.10",
-    "electron-builder": "^22.2.0",
-    "rimraf": "3.0.0",
+    "electron": "8.0.1",
+    "electron-builder": "22.3.2",
+    "rimraf": "3.0.2",
     "typescript": "3.7.5"
   },
   "dependencies": {
     "auto-launch": "5.0.5",
     "discord-rpc": "github:discordjs/RPC",
     "electron-store": "5.1.0",
-    "electron-updater": "^4.2.0",
+    "electron-updater": "4.2.0",
     "socket.io": "2.3.0"
   }
 }

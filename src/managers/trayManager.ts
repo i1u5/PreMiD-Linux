@@ -1,7 +1,7 @@
 import { Menu, Tray, app, shell } from "electron";
 import { join } from "path";
 import { trayManager } from "..";
-import { checkForUpdate, update, updateProcess } from "../util/updateChecker";
+import { checkForUpdate, updateProcess } from "../util/updateChecker";
 import { connected } from "./socketManager";
 
 let trayIcon = join(__dirname, "../assets/tray/Icon@2x.png");
@@ -47,20 +47,13 @@ export class TrayManager {
             (!updateProcess || (updateProcess && updateProcess === "standby"))
         },
         {
-          label: `Update now`,
-          click: () => update(),
-          visible:
-            app.isPackaged &&
-            app.name.includes("Portable") &&
-            updateProcess && updateProcess === "available"
-        },
-        {
           label: `Updating...`,
           enabled: false,
           visible:
             app.isPackaged &&
             app.name.includes("Portable") &&
-            updateProcess && updateProcess === "installing"
+            updateProcess &&
+            updateProcess === "installing"
         },
         {
           label: `Checking for updates...`,
@@ -68,7 +61,8 @@ export class TrayManager {
           visible:
             app.isPackaged &&
             app.name.includes("Portable") &&
-            updateProcess && updateProcess === "checking"
+            updateProcess &&
+            updateProcess === "checking"
         },
         {
           label: "Acknowledgments",

@@ -1,4 +1,3 @@
-import { dialog } from "electron";
 import { trayManager } from "..";
 import { autoUpdater } from "electron-updater";
 
@@ -20,10 +19,8 @@ autoUpdater.on("checking-for-update", () => {
 });
 
 autoUpdater.on("update-available", () => {
-  if (autoUpdater.autoDownload) {
-    updateTray("installing");
-  } else {
-    updateTray("available");
+  if (!autoUpdater.autoDownload) {
+    update();
   }
 });
 
@@ -46,11 +43,7 @@ export async function update() {
 
 autoUpdater.on("error", error => {
   updateTray("standby");
-  dialog.showErrorBox(
-    "An error occured while updating " +
-      (autoUpdater.autoDownload === true ? "[AUTO] :" : "[MANUAL] :"),
-    error == null ? "unknown" : (error.stack || error).toString()
-  );
+  errHandler(error);
 });
 
 function updateTray(reason: string) {

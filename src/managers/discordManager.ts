@@ -25,12 +25,19 @@ class RPCClient {
       this.clientReady = true;
       this.setActivity();
     });
-    // @ts-ignore
-    this.client.once("disconnected", this.destroy);
 
-    this.client.login({ clientId: this.clientId }).catch(this.destroy);
+    this.client.once(
+      // @ts-ignore
+      "disconnected",
+      () =>
+        (rpcClients = rpcClients.filter(
+          client => client.clientId !== this.clientId
+        ))
+    );
 
-    console.log("Create client");
+    this.client.login({ clientId: this.clientId }).catch(() => this.destroy());
+
+    console.log(`Create RPC client (${this.clientId})`);
   }
 
   setActivity(presenceData?: PresenceData) {
@@ -39,7 +46,9 @@ class RPCClient {
     if (!this.clientReady || !presenceData) return;
 
     presenceData.presenceData.largeImageText += ` App v${app.getVersion()}`;
-    this.client.setActivity(presenceData.presenceData).catch(this.destroy);
+    this.client
+      .setActivity(presenceData.presenceData)
+      .catch(() => this.destroy());
     console.log("Set activity");
   }
 
@@ -48,13 +57,19 @@ class RPCClient {
 
     if (!this.clientReady) return;
 
-    this.client.clearActivity().catch(this.destroy);
+    this.client.clearActivity().catch(() => this.destroy());
   }
 
-  destroy() {
-    console.log("Destroy client");
-    if (this.client) this.client.destroy().catch(() => {});
-    rpcClients = rpcClients.filter(client => client.clientId !== this.clientId);
+  async destroy() {
+    try {
+      console.log(`Destroy RPC client (${this.clientId})`);
+      this.client.clearActivity();
+      this.client.destroy();
+
+      rpcClients = rpcClients.filter(
+        client => client.clientId !== this.clientId
+      );
+    } catch (err) {}
   }
 }
 
@@ -93,6 +108,7 @@ export async function getDiscordUser() {
   return user.user;
 }
 
-app.once("will-quit", () => {
-  rpcClients.map(c => c.destroy());
-});
+app.once(
+  "will-quit",
+  async () => await Promise.all(rpcClients.map(c => c.destroy()))
+);
