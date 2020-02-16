@@ -31,6 +31,10 @@ autoUpdater.on("update-not-available", () => {
   updateTray("standby");
 });
 
+autoUpdater.on("update-downloaded", () => {
+  autoUpdater.quitAndInstall();
+});
+
 export async function update() {
   updateTray("installing");
   try {
