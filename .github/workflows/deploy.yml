@@ -32,7 +32,7 @@ jobs:
         with:
           files: |
             ./dist/app/dist/${{ steps.info.outputs.productName }}.zip
-            ./dist/app/dist/${{ steps.info.outputs.productName }}-Portable.AppImage
+            ./dist/app/dist/${{ steps.info.outputs.productName }} Portable.AppImage
           tag_name: v${{ steps.info.outputs.version }}-${{ steps.info.outputs.sha }}
           name: Nightly v${{ steps.info.outputs.version }}-${{ steps.info.outputs.sha }}
           draft: false
