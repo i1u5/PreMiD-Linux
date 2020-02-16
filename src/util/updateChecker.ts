@@ -8,7 +8,11 @@ autoUpdater.autoDownload = false;
 export async function checkForUpdate(auto = false) {
   autoUpdater.autoDownload = auto;
   updateTray("checking");
-  autoUpdater.checkForUpdates();
+  try {
+    autoUpdater.checkForUpdates();
+  } catch (error) {
+    errHandler(error);
+  }
 }
 
 autoUpdater.on("checking-for-update", () => {
@@ -16,7 +20,7 @@ autoUpdater.on("checking-for-update", () => {
 });
 
 autoUpdater.on("update-available", () => {
-  if (autoUpdater.autoDownload === true) {
+  if (autoUpdater.autoDownload) {
     updateTray("installing");
   } else {
     updateTray("available");
@@ -29,7 +33,11 @@ autoUpdater.on("update-not-available", () => {
 
 export async function update() {
   updateTray("installing");
-  autoUpdater.downloadUpdate();
+  try {
+    autoUpdater.downloadUpdate();
+  } catch (error) {
+    errHandler(error);
+  }
 }
 
 autoUpdater.on("error", error => {
@@ -41,14 +49,22 @@ autoUpdater.on("error", error => {
   );
 });
 
-autoUpdater.on("update-downloaded", () => {
-  autoUpdater.quitAndInstall();
-});
-
 function updateTray(reason: string) {
   console.log(
-    (autoUpdater.autoDownload === true ? "[A/" : "[M/") + "UPDATER] - " + reason.toUpperCase()
+    (autoUpdater.autoDownload ? "[A/" : "[M/") +
+      "UPDATER] - " +
+      reason.toUpperCase()
   );
   updateProcess = reason;
   trayManager.update();
+}
+
+// Temporarily
+function errHandler(error: any) {
+  console.log(
+    "An error occured while updating " +
+      (autoUpdater.autoDownload ? "[AUTO] :" : "[MANUAL] :"),
+    error ? (error.stack || error).toString() : "unknown"
+  );
+  updateTray("standby");
 }

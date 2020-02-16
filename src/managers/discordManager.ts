@@ -30,12 +30,7 @@ class RPCClient {
 
     this.client.login({ clientId: this.clientId }).catch(this.destroy);
 
-    console.log(
-      "Create client : " +
-        (this.client
-          ? this.client.application.name
-          : "unknown")
-    );
+    console.log("Create client");
   }
 
   setActivity(presenceData?: PresenceData) {
@@ -45,12 +40,7 @@ class RPCClient {
 
     presenceData.presenceData.largeImageText += ` App v${app.getVersion()}`;
     this.client.setActivity(presenceData.presenceData).catch(this.destroy);
-    console.log(
-      "Set activity : " +
-        (this.client
-          ? this.client.application.name
-          : "unknown")
-    );
+    console.log("Set activity");
   }
 
   clearActivity() {
@@ -62,7 +52,7 @@ class RPCClient {
   }
 
   destroy() {
-    console.log("Destroy client", this.clientId);
+    console.log("Destroy client");
     if (this.client) this.client.destroy().catch(() => {});
     rpcClients = rpcClients.filter(client => client.clientId !== this.clientId);
   }
@@ -88,16 +78,11 @@ export function setActivity(presence: PresenceData) {
 export function clearActivity(clientId: string = undefined) {
   if (clientId) {
     let client = rpcClients.find(c => c.clientId === clientId);
-    console.log(
-      "Clear activity : " +
-        (this.client
-          ? this.client.application.name
-          : "unknown")
-    );
+    console.log("Clear activity");
     client.clearActivity();
   } else {
     rpcClients.forEach(c => c.clearActivity());
-    console.log("Clear activity");
+    console.log("Clear all activity");
   }
 }
 
