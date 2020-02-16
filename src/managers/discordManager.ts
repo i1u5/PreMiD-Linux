@@ -32,7 +32,7 @@ class RPCClient {
 
     console.log(
       "Create client : " +
-        (this.client.application.name
+        (this.client
           ? this.client.application.name
           : "unknown")
     );
@@ -47,7 +47,7 @@ class RPCClient {
     this.client.setActivity(presenceData.presenceData).catch(this.destroy);
     console.log(
       "Set activity : " +
-        (this.client.application.name
+        (this.client
           ? this.client.application.name
           : "unknown")
     );
@@ -90,7 +90,7 @@ export function clearActivity(clientId: string = undefined) {
     let client = rpcClients.find(c => c.clientId === clientId);
     console.log(
       "Clear activity : " +
-        (this.client.application.name
+        (this.client
           ? this.client.application.name
           : "unknown")
     );
