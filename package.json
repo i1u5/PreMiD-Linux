@@ -11,9 +11,9 @@
     "start": "npm run init && electron dist/app/.",
     "dev": "devScript",
     "dist": "rimraf dist && tsc && devScript --copyOnly && cd dist/app/ && npm i",
-    "build": "electron-builder",
-    "build:appimage": "electron-builder build -l AppImage --x64 -p onTagOrDraft",
-    "build:n-appimage": "electron-builder build -l AppImage --x64 -p never"
+    "build": "electron-builder --project ./dist/app/",
+    "build:appimage": "electron-builder --project ./dist/app/ build -l AppImage --x64 -p onTagOrDraft",
+    "build:n-appimage": "electron-builder --project ./dist/app/ build -l AppImage --x64 -p never"
   },
   "build": {
     "appId": "com.PreMiD.app",
