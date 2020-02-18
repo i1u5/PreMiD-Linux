@@ -43,6 +43,6 @@ On the other hand, **PreMiD** is a simple, configurable utility that allows you 
     </a>
   </div>
 
-
 ## License
+
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdoomlerd%2FPreMiD-Linux.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fdoomlerd%2FPreMiD-Linux?ref=badge_large)

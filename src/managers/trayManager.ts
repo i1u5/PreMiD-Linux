@@ -47,7 +47,7 @@ export class TrayManager {
             (!updateProcess || (updateProcess && updateProcess === "standby"))
         },
         {
-          label: `Updating...`,
+          label: "Updating...",
           enabled: false,
           visible:
             app.isPackaged &&
@@ -56,7 +56,7 @@ export class TrayManager {
             updateProcess === "installing"
         },
         {
-          label: `Checking for updates...`,
+          label: "Checking for updates...",
           enabled: false,
           visible:
             app.isPackaged &&
