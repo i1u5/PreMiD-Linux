@@ -16,7 +16,7 @@ export async function update() {
   //* Either enable/disable autolaunch
   if (!app.isPackaged || (app.isPackaged && app.name.includes("Portable"))) {
     //* Return
-    console.log("Skipping autoLaunch.");
+    console.log("Skipping autoLaunch");
     return;
   }
   if (settings.get("autoLaunch", true))

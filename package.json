@@ -1,11 +1,21 @@
 {
   "name": "premid",
   "productName": "PreMiD",
-  "author": "Timeraa",
-  "description": "Discord Rich Presence for web services.",
+  "author": "Florian 'Timeraa' Metz <me@timeraa.dev> (https://github.com/timeraa)",
+  "contributors": [
+    "Jack 'DooMLorD' W. <doomlordcs@gmail.com> (https://github.com/doomlerd)"
+  ],
+  "description": "Discord Rich Presence for web services",
   "version": "2.1.3",
-  "repository": "https://github.com/PreMiD/PreMiD",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/doomlerd/PreMiD-Linux.git"
+  },
+  "bugs": {
+    "url": "https://github.com/doomlerd/PreMiD-Linux/issues"
+  },
+  "homepage": "https://premid.app",
+  "license": "MPL-2.0",
   "scripts": {
     "init": "tsc && devScript --copyOnly",
     "start": "npm run init && electron dist/app/.",
@@ -19,7 +29,7 @@
     "appId": "com.PreMiD.app",
     "copyright": "PreMiD Org",
     "linux": {
-      "maintainer": "DooMLorD#2792",
+      "maintainer": "Jack 'DooMLorD' W. <doomlordcs@gmail.com> (https://github.com/doomlerd)",
       "category": "Utility",
       "artifactName": "${productName}.${ext}",
       "target": [
@@ -54,6 +64,7 @@
     "discord-rpc": "github:discordjs/RPC",
     "electron-store": "5.1.0",
     "electron-updater": "4.2.2",
-    "socket.io": "2.3.0"
+    "socket.io": "2.3.0",
+    "source-map-support": "^0.5.16"
   }
 }
