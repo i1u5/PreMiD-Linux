@@ -57,7 +57,7 @@
     "electron": "8.0.1",
     "electron-builder": "22.3.2",
     "rimraf": "3.0.2",
-    "typescript": "3.7.5"
+    "typescript": "3.8.2"
   },
   "dependencies": {
     "auto-launch": "5.0.5",
