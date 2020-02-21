@@ -5,6 +5,7 @@
 
 ## Your Rich Presence for web services!
 
+![CI](https://github.com/doomlerd/PreMiD-Linux/workflows/CI/badge.svg?branch=master&event=push)
 ![GitHub](https://img.shields.io/github/license/doomlerd/PreMiD-Linux?style=for-the-badge)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/doomlerd/PreMiD-Linux?label=Application&style=for-the-badge)
 ![Chrome Web Store](https://img.shields.io/chrome-web-store/v/agjnjboanicjcpenljmaaigopkgdnihi?label=Extension&style=for-the-badge)

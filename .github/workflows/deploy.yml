@@ -1,8 +1,9 @@
-name: Deploy
+name: CI
 on:
   repository_dispatch:
   push:
-    branch: master
+    branches:
+      - master
 jobs:
   nightly:
     name: Nightly Build
