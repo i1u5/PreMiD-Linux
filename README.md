@@ -5,15 +5,9 @@
 
 ## Your Rich Presence for web services!
 
-![CI](https://github.com/doomlerd/PreMiD-Linux/workflows/CI/badge.svg?branch=master&event=push)
-![GitHub](https://img.shields.io/github/license/doomlerd/PreMiD-Linux?style=for-the-badge)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/doomlerd/PreMiD-Linux?label=Application&style=for-the-badge)
-![Chrome Web Store](https://img.shields.io/chrome-web-store/v/agjnjboanicjcpenljmaaigopkgdnihi?label=Extension&style=for-the-badge)
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/d/agjnjboanicjcpenljmaaigopkgdnihi.svg?label=Chrome&logo=google%20chrome&logoColor=white&colorA=4285F4&style=for-the-badge)](https://chrome.google.com/webstore/detail/premid/agjnjboanicjcpenljmaaigopkgdnihi)
-![Website](https://img.shields.io/website?down_message=offline&label=PreMiD.app&style=for-the-badge&up_message=online&url=https%3A%2F%2Fpremid.app)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdoomlerd%2FPreMiD-Linux.svg?type=small)](https://app.fossa.com/projects/git%2Bgithub.com%2Fdoomlerd%2FPreMiD-Linux?ref=badge_small)
-![Twitter Follow](https://img.shields.io/twitter/follow/PreMiDapp?label=PreMiD&style=social)
-![Subreddit subscribers](https://img.shields.io/reddit/subreddit-subscribers/premid?label=PreMiD&style=social)
+| Deployment | Total downloads | Latest release |
+| :---: | :---: | :---: |
+|  [![CI](https://github.com/doomlerd/PreMiD-Linux/workflows/CI/badge.svg?branch=master&event=push)](https://github.com/doomlerd/PreMiD-Linux/actions)  |  [![All releases](https://img.shields.io/github/downloads/doomlerd/PreMiD-Linux/total.svg?maxAge=86400)](https://github.com/doomlerd/PreMiD-Linux/releases)  |  [![Latest release](https://img.shields.io/github/v/release/doomlerd/PreMiD-Linux.svg?maxAge=86400)](https://github.com/doomlerd/PreMiD-Linux/releases) <br> [![Github Releases](https://img.shields.io/github/downloads/doomlerd/PreMiD-Linux/latest/total.svg?maxAge=86400)](https://github.com/doomlerd/PreMiD-Linux/releases)  | 
 
 <img src=".github/example.png" draggable="false"><br>
 
