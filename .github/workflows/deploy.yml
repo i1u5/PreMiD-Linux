@@ -15,7 +15,7 @@ jobs:
       - name: Gather Information
         id: info
         run: |
-          echo "::set-output name=sha::$(git rev-parse --short HEAD)"
+          echo "::set-output name=timestamp::$(date +%s)"
           echo "::set-output name=productName::$(node -p -e "require('./package.json').productName")"
           echo "::set-output name=version::$(node -p -e "require('./package.json').version")"
       - name: Install Dependencies
@@ -34,8 +34,8 @@ jobs:
           files: |
             ./dist/app/dist/${{ steps.info.outputs.productName }}.zip
             ./dist/app/dist/${{ steps.info.outputs.productName }} Portable.AppImage
-          tag_name: v${{ steps.info.outputs.version }}-${{ steps.info.outputs.sha }}
-          name: Nightly v${{ steps.info.outputs.version }}-${{ steps.info.outputs.sha }}
+          tag_name: v${{ steps.info.outputs.version }}-${{ steps.info.outputs.timestamp }}
+          name: Nightly v${{ steps.info.outputs.version }}-${{ steps.info.outputs.timestamp }}
           draft: false
           prerelease: true
         env:
