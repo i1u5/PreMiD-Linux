@@ -7,9 +7,8 @@ tmp
 .env
 
 src/package-lock.json
+src/yarn.lock
 src/package.json
-src/update.ini
 
 *.app
-*.xml.backup
 *.js

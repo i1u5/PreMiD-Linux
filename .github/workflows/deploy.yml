@@ -20,14 +20,14 @@ jobs:
           echo "::set-output name=version::$(node -p -e "require('./package.json').version")"
       - name: Install Dependencies
         run: |
-          npm i
-          npm run dist
+          yarn install
+          yarn run dist
       - name: Building
-        run: npm run build
+        run: yarn run build
       - name: Building AppImage
         run: |
           jq -c '.productName = "PreMiD Portable"' ./dist/app/package.json > tmp.$$.json && mv tmp.$$.json ./dist/app/package.json
-          npm run build:n-appimage
+          yarn run build:n-appimage
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
@@ -54,10 +54,10 @@ jobs:
           echo "::set-output name=version::$(node -p -e "require('./package.json').version")"
       - name: Install Dependencies
         run: |
-          npm i
-          npm run dist
+          yarn install
+          yarn run dist
       - name: Building
-        run: npm run build
+        run: yarn run build
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
@@ -72,6 +72,6 @@ jobs:
       - name: Publish AppImage
         run: |
           jq -c '.productName = "PreMiD Portable"' ./dist/app/package.json > tmp.$$.json && mv tmp.$$.json ./dist/app/package.json
-          npm run build:appimage
+          yarn run build:appimage
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

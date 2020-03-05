@@ -34,7 +34,7 @@ On the other hand, **PreMiD** is a simple, configurable utility that allows you 
       <img height="75px" draggable="false" src=".github/Patreon.png">
     </a>
     <a target="_blank" href="https://discord.gg/WvfVZ8T" title="Join our Discord!">
-      <img height="75px" draggable="false" src="https://discordapp.com/api/guilds/493130730549805057/widget.png?style=banner2" alt="Join my Discord!">
+      <img height="75px" draggable="false" src="https://discordapp.com/api/guilds/493130730549805057/widget.png?style=banner2" alt="Join our Discord!">
     </a>
   </div>
 
