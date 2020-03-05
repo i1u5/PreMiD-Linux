@@ -54,7 +54,7 @@
     "@types/node": "13.7.7",
     "@types/rimraf": "2.0.3",
     "@types/socket.io": "2.1.4",
-    "electron": "8.0.2",
+    "electron": "8.0.3",
     "electron-builder": "22.3.2",
     "rimraf": "3.0.2",
     "typescript": "3.8.3"
