@@ -55,11 +55,19 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-node@master
-      - name: Fetch Package.json
-        id: package
+      - name: Gather Information
+        id: info
         run: |
           echo "::set-output name=productName::$(node -p -e "require('./package.json').productName")"
           echo "::set-output name=version::$(node -p -e "require('./package.json').version")"
+          echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: ${{ steps.info.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install Dependencies
         run: |
           yarn install
@@ -70,9 +78,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ./dist/app/dist/${{ steps.package.outputs.productName }}.zip
-          tag_name: v${{ steps.package.outputs.version }}
-          name: Stable v${{ steps.package.outputs.version }}
+            ./dist/app/dist/${{ steps.info.outputs.productName }}.zip
+          tag_name: v${{ steps.info.outputs.version }}
+          name: Stable v${{ steps.info.outputs.version }}
           draft: true
           prerelease: false
         env:
