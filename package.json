@@ -37,7 +37,7 @@
         "zip"
       ],
       "extraFiles": [
-        "../../installer_assets/*"
+        "**/installer_assets/*"
       ]
     },
     "publish": [
