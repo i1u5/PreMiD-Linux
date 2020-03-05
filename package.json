@@ -31,11 +31,14 @@
     "linux": {
       "maintainer": "Jack 'DooMLorD' W. <doomlordcs@gmail.com> (https://github.com/doomlerd)",
       "category": "Utility",
+      "compression": "store",
       "artifactName": "${productName}.${ext}",
       "target": [
         "zip"
       ],
-      "icon": "../../installer_assets/appIcon.icns"
+      "extraFiles": [
+        "../../installer_assets/appIcon.png"
+      ]
     },
     "publish": [
       {

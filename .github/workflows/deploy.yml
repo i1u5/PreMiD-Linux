@@ -62,7 +62,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ./dist/app/dist/${{ steps.package.outputs.productName }}-${{ steps.package.outputs.version }}.zip
+            ./dist/app/dist/${{ steps.package.outputs.productName }}.zip
           tag_name: v${{ steps.package.outputs.version }}
           name: Stable v${{ steps.package.outputs.version }}
           draft: true
