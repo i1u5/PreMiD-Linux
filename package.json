@@ -6,7 +6,7 @@
     "Jack 'DooMLorD' W. <doomlordcs@gmail.com> (https://github.com/doomlerd)"
   ],
   "description": "Discord Rich Presence for web services",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "repository": {
     "type": "git",
     "url": "git://github.com/doomlerd/PreMiD-Linux.git"
@@ -34,7 +34,7 @@
       "compression": "store",
       "artifactName": "${productName}.${ext}",
       "target": [
-        "zip"
+        "tar.gz"
       ],
       "extraFiles": [
         "assets/premid.desktop",

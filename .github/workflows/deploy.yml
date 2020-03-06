@@ -40,7 +40,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ./dist/app/dist/${{ steps.info.outputs.productName }}.zip
+            ./dist/app/dist/${{ steps.info.outputs.productName }}.tar.gz
             ./dist/app/dist/${{ steps.info.outputs.productName }} Portable.AppImage
           tag_name: v${{ steps.info.outputs.version }}-${{ steps.info.outputs.timestamp }}
           name: Nightly v${{ steps.info.outputs.version }}-${{ steps.info.outputs.timestamp }}
@@ -78,7 +78,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ./dist/app/dist/${{ steps.info.outputs.productName }}.zip
+            ./dist/app/dist/${{ steps.info.outputs.productName }}.tar.gz
           tag_name: v${{ steps.info.outputs.version }}
           name: Stable v${{ steps.info.outputs.version }}
           draft: true
