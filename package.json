@@ -37,7 +37,8 @@
         "zip"
       ],
       "extraFiles": [
-        "**/installer_assets/*"
+        "assets/premid.desktop",
+        "assets/appIcon.png"
       ]
     },
     "publish": [
