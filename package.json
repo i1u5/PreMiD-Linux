@@ -6,13 +6,13 @@
     "Jack 'DooMLorD' W. <doomlordcs@gmail.com> (https://github.com/doomlerd)"
   ],
   "description": "Discord Rich Presence for web services",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "repository": {
     "type": "git",
-    "url": "git://github.com/doomlerd/PreMiD-Linux.git"
+    "url": "git://github.com/PreMiD/Linux.git"
   },
   "bugs": {
-    "url": "https://github.com/doomlerd/PreMiD-Linux/issues"
+    "url": "https://github.com/PreMiD/Linux/issues"
   },
   "homepage": "https://premid.app",
   "license": "MPL-2.0",
@@ -44,8 +44,8 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "doomlerd",
-        "repo": "PreMiD-Linux",
+        "owner": "PreMiD",
+        "repo": "Linux",
         "vPrefixedTagName": true,
         "releaseType": "release"
       }
