@@ -44,8 +44,6 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "PreMiD",
-        "repo": "Linux",
         "vPrefixedTagName": true,
         "releaseType": "release"
       }

@@ -5,6 +5,11 @@ export let updateProcess: string = "standby";
 autoUpdater.autoDownload = false;
 
 export async function checkForUpdate(auto = false) {
+  autoUpdater.setFeedURL({
+    provider: "github",
+    owner: "PreMiD",
+    repo: "Linux"
+  });
   autoUpdater.autoDownload = auto;
   updateTray("checking");
   try {
@@ -42,7 +47,6 @@ export async function update() {
 }
 
 autoUpdater.on("error", error => {
-  updateTray("standby");
   errHandler(error);
 });
 
