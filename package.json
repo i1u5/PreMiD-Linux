@@ -9,7 +9,7 @@
   "version": "2.1.7",
   "repository": {
     "type": "git",
-    "url": "git://github.com/PreMiD/Linux.git"
+    "url": "git://github.com/doomlerd/PreMiD-Linux.git"
   },
   "bugs": {
     "url": "https://github.com/PreMiD/Linux/issues"
@@ -44,6 +44,8 @@
     "publish": [
       {
         "provider": "github",
+        "owner": "doomlerd",
+        "repo": "PreMiD-Linux",
         "vPrefixedTagName": true,
         "releaseType": "release"
       }
